@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TeaToday</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="tea_type">Tea</string>
+    <string name="find_tea_button">Yum!</string>
+    <string name="tea_type_dialog_title">Choose Your Tea type!</string>
+
+</resources>

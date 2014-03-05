@@ -1,25 +1,33 @@
 package com.main.teatoday;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.choosetea.teatoday.RandomTea;
 
 public class MainActivity extends Activity {
-	int teaType = 0;
+	int teaType = 5;
+	boolean withMilk = false;
+	boolean latte = false;
+	boolean jelly = false;
+	boolean herb = false;
+	boolean pearl = false;
+	boolean hot = false;
+	boolean cold = false;
+	RandomTea randomTeaGenerator = new RandomTea();
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 	}
 
 	@Override
@@ -28,54 +36,137 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
 	public void randomTeaGenerator(View view){
-		CheckBox check = (CheckBox) findViewById(R.id.teaType);
-		boolean checked = check.isChecked();
-        if (checked){
-        	final ArrayList teaTypes = new ArrayList();  // Where we track the selected items
-    	    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	    // Set the dialog title
-    	    builder.setTitle(R.string.tea_type_dialog_title)
-    	    // Specify the list array, the items to be selected by default (null for none),
-    	    // and the listener through which to receive callbacks when items are selected
-    	  
-    	           .setMultiChoiceItems(R.string., null,
-    	                      new DialogInterface.OnMultiChoiceClickListener() {
-    	               @Override
-    	               public void onClick(DialogInterface dialog, int which,
-    	                       boolean isChecked) {
-    	                   if (isChecked) {
-    	                       // If the user checked the item, add it to the selected items
-    	                	   teaTypes.add(which);
-    	                   } else if (teaTypes.contains(which)) {
-    	                       // Else, if the item is already in the array, remove it 
-    	                	   teaTypes.remove(Integer.valueOf(which));
-    	                   }
-    	               }
-    	           })
-    	    // Set the action buttons
-    	           .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-    	               @Override
-    	               public void onClick(DialogInterface dialog, int id) {
-    	            	   
-    	               }
-    	           })
-    	           .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-    	               @Override
-    	               public void onClick(DialogInterface dialog, int id) {
-    	            	   
-    	               }
-    	           });
-        	
-        }else{
-        	
-        };
+		
 		AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-        dlgAlert.setMessage(RandomTea.teaType(teaType));
-        dlgAlert.setTitle("Your Tea Today!");
-        dlgAlert.setPositiveButton("OK", null);
-        dlgAlert.setCancelable(true);
+        dlgAlert.setMessage(randomTeaGenerator.teaType(teaType,withMilk,latte,hot,cold,herb,jelly,pearl))
+        	.setTitle("Your Tea Today!")
+        	.setPositiveButton("OK", null)
+        	.setCancelable(true);
         dlgAlert.create().show();
 	}
+	public void choosePreferences(View view){
+		
+        
+		boolean checked = ((CheckBox) view).isChecked();
+		
+		final TextView teaTypeText = (TextView) findViewById(R.id.teaTypeText);
+		final TextView milkText = (TextView) findViewById(R.id.milkText);
+		final TextView latteText = (TextView) findViewById(R.id.latteText);
+		final TextView hotOrColdText = (TextView) findViewById(R.id.hotOrColdText);
+		final TextView jellyText = (TextView) findViewById(R.id.jellyText);
+		final TextView herbText = (TextView) findViewById(R.id.herbText);
+		final TextView tapiocaPearlText = (TextView) findViewById(R.id.tapiocaPearlText);
+		final CheckBox milkCheckBox = (CheckBox)findViewById(R.id.milkCheckBox);
+		final CheckBox latteCheckBox = (CheckBox)findViewById(R.id.latteCheckBox);
+		final CheckBox coldCheckBox = (CheckBox)findViewById(R.id.coldCheckBox);
+		final CheckBox hotCheckBox = (CheckBox)findViewById(R.id.hotCheckBox);
+		switch(view.getId()) {
+        case R.id.teaTypeCheckBox:
+            if (checked){
+            	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        	builder.setTitle(R.string.tea_type_dialog_title)
+	            .setItems(R.array.tea_type_array, new DialogInterface.OnClickListener() {
+	                public void onClick(DialogInterface dialog, int which) {
+	                // The 'which' argument contains the index position
+	                // of the selected item
+	                	String[] teaTypeArray = getResources().getStringArray(R.array.tea_type_array);
+	                	teaType = which;
+	                	teaTypeText.setText(teaTypeArray[which]);
+	                }
+	            });
+	        	AlertDialog dialog = builder.create();
+	        	dialog.show();}
+            else{
+            	teaType = 5;
+            	teaTypeText.setText("");
+            }
+            break;
+        case R.id.milkCheckBox:
+        	
+            if (checked){
+            	withMilk = true;
+            	milkText.setText("With Milk");
+            }
+            else{
+            	latteCheckBox.setChecked(false);
+            	latte = false;
+            	latteText.setText("");
+            	withMilk = false;
+            	milkText.setText("");
+            }
+            break;
+        case R.id.latteCheckBox:
+            if (checked){
+            	milkCheckBox.setChecked(true);
+            	latte = true;
+            	latteText.setText("Latte");
+            	withMilk = true;
+            	milkText.setText("With Milk");
+            }
+            else{
+            	latte = false;
+            	latteText.setText("");
+            }
+            break;
+        case R.id.hotCheckBox:
+            if (checked){
+            	hot = true;
+            	cold = false;
+                coldCheckBox.setChecked(false);
+            	hotOrColdText.setText("Hot");
+            }
+            else{
+            	hot = false;
+            	hotOrColdText.setText("");
+            }
+            break;
+        case R.id.coldCheckBox:
+            if (checked){
+            	cold = true;
+            	hot = false;
+            	hotCheckBox.setChecked(false);
+            	hotOrColdText.setText("Cold");
+            }
+            else{
+            	cold = false;
+            	hotOrColdText.setText("");
+            }
+            break;
+        case R.id.jellyCheckBox:
+            if (checked){
+            	jelly = true;
+            	jellyText.setText("With Jelly");
+            }
+            else{
+            	jelly = false;
+            	jellyText.setText("");
+            }
+            break;
+        case R.id.herbCheckBox:
+            if (checked){
+            	herb = true;
+            	herbText.setText("With Herb");
+            }
+            else{
+            	herb = false;
+            	herbText.setText("");
+            }
+            break;
+        case R.id.tapiocaPearlCheckBox:
+            if (checked){
+            	pearl = true;
+            	tapiocaPearlText.setText("With Tapioca Pearl");
+            }
+            else{
+            	pearl = false;
+            	tapiocaPearlText.setText("");
+            }
+            break;
+    }
+		
+	}
+
 	
 }

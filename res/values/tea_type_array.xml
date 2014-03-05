@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tea_type_array">
+        <item >Black Tea</item>
+        <item >Green Tea</item>
+        <item >Oolong Tea</item>
+        <item >Herbal/Decaf</item>
+        <item >White Tea</item>
+    </string-array>
+    
+</resources>

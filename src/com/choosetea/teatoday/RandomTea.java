@@ -3,116 +3,201 @@ package com.choosetea.teatoday;
 import java.util.Random;
 
 public class RandomTea {
-	
-	public static String teaType(int teaType){
-		int type = teaType;
+
+	String [] oolongTea = {
+			"Dark Roasted Oolong",
+			"Milk Oolong",
+			"Osmanthus Oolong",
+			"Rose Oolong",
+			"Lavender Oolong"};
+	String [] whiteTea = {
+			"Mango White Tea",
+			"Vanilla White Tea"};
+	String[] sixtyPercentBlackTea ={
+			"Ceylon",
+			"Assam",
+			"Earl Grey"};
+	String[] fivePercentBlackTea ={
+			"Lemon",
+			"Darjeeling",
+			"Cinnamon & Spice"};
+	String[] thirtyFivePercentBlackTea ={
+			"Chai Masala",
+			"English Breakfast",
+			"Keemun",
+			"Chocolate Mint",
+			"Lychee",
+			"Passion Fruit",
+			"Vanilla Nuts",
+			"Vanilla Nuts Earl Grey",
+			"Camomile Puerh",
+			"Lavender Black",
+			"Pureh"};
+	String[] sixtyPercentGreenTea ={
+			"Jasmine Green Tea",
+			"Strawberry Sencha"};
+	String[] fivePercentGreenTea ={
+			"Dragon Pearl",
+			"Bancha",
+			"Houjicha",
+			"Sencha Asamushi",
+			"Blue Forest",
+			"Cherry",
+			"Ginger",
+			"Orange Zest",
+			"Yerba Mate"};
+	String[] thirtyFivePercentGreenTea ={
+			"Genmaicha",
+			"Kukicha",
+			"Moroccan Mint",
+			"Pomegranate Blueberry"};
+	String[] seventyPercentHerbal ={
+			"Camomile",
+			"Honeybush Four Seasons",
+			"Honeybush Ruby",
+			"Honeybush Strawberry Melon",
+			"Honeybush Vanilla",
+			"Decaf Green Tea"};
+	String[] thirtyPercentHerbal ={
+			"Lavender",
+			"Rooibos Organic",
+			"Rooibos Blueberry",
+			"Rooibos Earl Grey"};
+	String[] sixtyPercentAllTea ={
+			"Jasmine Green Tea",
+			"Strawberry Sencha",
+			"Ceylon",
+			"Assam",
+			"Earl Grey",
+			"Dark Roasted Oolong",
+			"Milk Oolong",
+			"Osmanthus Oolong",
+			"Rose Oolong",
+			"Lavender Oolong"};
+	String[] thirtyFivePercentAllTea ={
+			"Genmaicha",
+			"Kukicha",
+			"Moroccan Mint",
+			"Pomegranate Blueberry",
+			"Chai Masala",
+			"English Breakfast",
+			"Keemun",
+			"Chocolate Mint",
+			"Lychee",
+			"Passion Fruit",
+			"Vanilla Nuts",
+			"Vanilla Nuts Earl Grey",
+			"Camomile Puerh",
+			"Lavender Black",
+			"Pureh",
+			"Camomile",
+			"Honeybush Four Seasons",
+			"Honeybush Ruby",
+			"Honeybush Strawberry Melon",
+			"Honeybush Vanilla",
+			"Decaf Green Tea"};
+	String[] fivePercentAllTea ={
+			"Lemon",
+			"Darjeeling",
+			"Cinnamon & Spice",
+			"Dragon Pearl",
+			"Bancha",
+			"Houjicha",
+			"Sencha Asamushi",
+			"Blue Forest",
+			"Cherry",
+			"Ginger",
+			"Orange Zest",
+			"Yerba Mate",
+			"Lavender",
+			"Rooibos Organic",
+			"Rooibos Blueberry",
+			"Rooibos Earl Grey",
+			"Mango White Tea",
+			"Vanilla White Tea"};
+	public String teaType(int teaType,boolean milk, boolean latte, boolean hot,boolean cold,boolean herb, boolean jelly,boolean pearl){
 		String tea = null;
-		//1:Black, 2:Green, 3:Oolong, 4:Herbel, 5:White Tea
-		/*String cylon = "Cylon";
-		String assam = "Assam";
-		String oolongFormosa = "Oolong Formosa";
-		String earlGrey = "Earl Grey";
-		String camomile = "Camomile";
-		String roseOolong ="Rose Oolong";
-		String osmanthusOolong = "Osmanthus Oolong";
-		String strawberrySencha = "Strawberry Sencha";
-		String passionfruitblack = "Passionfruit Black";
-		String lycheeBlack = "Lychee Black";
-		String kukicha = "Kukicha";
-		String darkroastedOolong = "Dark Roasted Oolong";
-		String masalachai = "Masalachai";
-		String cinnamonAndSpice = "Cinnamon And Spice";
-		String moroccoMint = "Morocco Mint";
-		String chocolateMint = "Chocolate Mint";
-		String vanillaNut = "Vanilla Nut";
-		String vanillaNutEarlGrey = "Vanilla Nut Earl Grey";
-		String puerh = "Puerh";
-		String camomilePuerh = "Camomile Puerh";
-		String lavenderBlack = "Lavender Black";
-		String lavenderOolong = "Lavender Oolong";
-		String blueForest = "Blue Forest";
-		String blueberryPomegranate = "Blueberry Pomegranate";
-		String orange = "Orange";
-		String citron = "Citron";
-		String cherry = "Cherry";
-		String honeybushStrawberryMelon = "Honeybush Strawberry Melon";
-		String honeybushVanilla = "Honeybush Vanilla";
-		String honeybushOrganic = "Honeybush Organic";*/
-		String [] blackTea = {
-				"Assam",
-				"Ceylon",
-				"Chai Masala",
-				"Darjeeling",
-				"Earl Grey",
-				"English Breakfast",
-				"Keemun",
-				"Chocolate Mint",
-				"Cinnamon & Spice",
-				"Lemon",
-				"Lychee",
-				"Passion Fruit",
-				"Vanilla Nuts",
-				"Vanilla Nuts Earl Grey",
-				"Camomile Puerh",
-				"Lavender Black",
-				"Pureh"};
-		String [] greenTea = {
-				"Jasmine Green Tea",
-				"Dragon Pearl",
-				"Jade Bamboo (Mao Jian)",
-				"Bancha",
-				"Genmaicha",
-				"Houjicha",
-				"Kukicha",
-				"Sencha Asamushi",
-				"Moroccan Mint",
-				"Blue Forest",
-				"Cherry",
-				"Ginger",
-				"Orange Zest",
-				"Pomegranate Blueberry",
-				"Strawberry Sencha",
-				"Yerba Mate"};
-		String [] oolongTea = {
-				"Dark Roasted Oolong",
-				"Milk Oolong",
-				"Osmanthus Oolong",
-				"Rose Oolong",
-				"Lavender Oolong"};
-		String [] herbalDecafe = {
-				"Camomile",
-				"Lavender",
-				"Honeybush Four Seasons",
-				"Honeybush Ruby",
-				"Honeybush Strawberry Melon",
-				"Honeybush Vanilla",
-				"Rooibos Organic",
-				"Rooibos Blueberry",
-				"Rooibos Earl Grey",
-				"Decaf Green Tea"};
-		String [] whiteTea = {
-				"Mango White Tea",
-				"Vanilla White Tea"};
-		String [][] allTea = {blackTea,greenTea,oolongTea,herbalDecafe,whiteTea};
-		switch(type){
-		//0:All Tea,1:Black, 2:Green, 3:Oolong, 4:Herbel, 5:White Tea
-			/*case 0:
-				tea = allTea[randInt(0,allTea[].length),randInt(0,allTea[].length)];*/
+		String[] withMilk = {""," Milk Tea"," Latte"};
+		String[] hotOrCold = {" Hot"," Cold"};
+		String[] withHerb = {""," With Herb"};
+		String[] withJelly = {""," With Jelly"};
+		String[] withPearl = {""," With Pearl"};
+		double r = Math.random();
+		
+		//String [][] allTea = {blackTea,greenTea,oolongTea,herbalDecafe,whiteTea};
+		switch(teaType){
+		//5:All Tea,0:Black, 1:Green, 2:Oolong, 3:Herbel, 4:White Tea
+			case 0:
+				if (r < 0.60) {
+					tea = sixtyPercentBlackTea[randInt(0,sixtyPercentBlackTea.length-1)];
+				}else if(r < 0.95){
+					tea = thirtyFivePercentBlackTea[randInt(0,thirtyFivePercentBlackTea.length-1)];
+				}else{
+					tea = fivePercentBlackTea[randInt(0,fivePercentBlackTea.length-1)];
+				}
+				break;
 			case 1:
-				tea = blackTea[randInt(0,blackTea.length-1)];
+				if (r < 0.60) {
+					tea = sixtyPercentGreenTea[randInt(0,sixtyPercentGreenTea.length-1)];
+				}else if(r < 0.95){
+					tea = thirtyFivePercentGreenTea[randInt(0,thirtyFivePercentGreenTea.length-1)];
+				}else{
+					tea = fivePercentGreenTea[randInt(0,fivePercentGreenTea.length-1)];
+				}
 				break;
 			case 2:
-				tea = greenTea[randInt(0,greenTea.length-1)];
-				break;
-			case 3:
 				tea = oolongTea[randInt(0,oolongTea.length-1)];
 				break;
-			case 4:
-				tea = herbalDecafe[randInt(0,herbalDecafe.length-1)];
+			case 3:
+				if (r < 0.70) {
+					tea = seventyPercentHerbal[randInt(0,seventyPercentHerbal.length-1)];
+				}else{
+					tea = thirtyPercentHerbal[randInt(0,thirtyPercentHerbal.length-1)];
+				}
 				break;
-			case 5:	
+			case 4:	
 				tea = whiteTea[randInt(0,whiteTea.length-1)];
 				break;
+			case 5:
+				if (r < 0.60) {
+					tea = sixtyPercentAllTea[randInt(0,sixtyPercentAllTea.length-1)];
+				}else if(r < 0.95){
+					tea = thirtyFivePercentAllTea[randInt(0,thirtyFivePercentAllTea.length-1)];
+				}else{
+					tea = fivePercentAllTea[randInt(0,fivePercentAllTea.length-1)];
+				}
+				break;
+		}
+		if(cold){
+			tea = tea + hotOrCold[1];
+		}else if(hot){
+			tea = tea + hotOrCold[0];
+		}else{
+			tea = tea + hotOrCold[randInt(0,1)];
+		}
+		if(milk){
+			tea = tea + withMilk[1];
+		}else if(latte){
+			tea = tea + withMilk[2];
+		}else{
+			tea = tea + withMilk[randInt(0,2)];
+		}
+		
+		
+		if(herb){
+			tea = tea + withHerb[1];
+		}else{
+			tea = tea + withHerb[randInt(0,1)];
+		}
+		if(jelly){
+			tea = tea + withJelly[1];
+		}else{
+			tea = tea + withJelly[randInt(0,1)];
+		}
+		if(pearl){
+			tea = tea + withPearl[1];
+		}else{
+			tea = tea + withPearl[randInt(0,1)];
 		}
 		return tea;
 		
@@ -128,5 +213,4 @@ public class RandomTea {
 
 	    return randomNum;
 	}
-	
 }
